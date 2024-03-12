@@ -1,8 +1,25 @@
 namespace CreationalPatterns;
 
+public class Factory
+{
+    public static BaseCar CreateFactory(FactoryType type) => type switch
+    {
+        FactoryType.MASTODON => new MastodonCar(),
+        FactoryType.RHYNO => new RhinoCar(),
+        _ => throw new ArgumentException("Invalid factory type"),
+    };
+
+    public enum FactoryType
+    {
+        MASTODON,
+        RHYNO
+    }
+
+}
+
 public abstract class BaseCar
 {
-    public void ShowCost()
+    public virtual void ShowCost()
     {
         throw new NotImplementedException("Method no implemented");
     }
@@ -26,7 +43,7 @@ public class RhinoCar : BaseCar
 
 public abstract class CarFactory
 {
-    public BaseCar MakeCar()
+    public virtual BaseCar MakeCar()
     {
         throw new NotImplementedException("Method no implemented");
     }
